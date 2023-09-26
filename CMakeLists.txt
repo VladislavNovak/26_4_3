@@ -3,4 +3,5 @@ project(26_4_3)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(26_4_3 main.cpp)
+add_executable(26_4_3 main.cpp
+        utilities.h)
