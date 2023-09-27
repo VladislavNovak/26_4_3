@@ -1,4 +1,4 @@
-#include "screen.h"
+#include "../include/screen.h"
 
 // Private. Вызывает отрисовку указанного window
 void Screen::print(int index) {

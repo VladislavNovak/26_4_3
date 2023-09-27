@@ -1,4 +1,4 @@
-#include "window.h"
+#include "../include/window.h"
 
 // Private
 void Window::putSize(SizeType mode, int constrain) {
