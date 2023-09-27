@@ -37,14 +37,11 @@ int putInput() {
     int input;
     while (true) {
         std::cin >> input;
-
         if (std::cin.fail()) {
             std::cout << "Input is invalid. Please try again:";
             resetBuffer();
             continue;
         }
-
-        resetBuffer();
         break;
     }
     return input;
@@ -60,6 +57,7 @@ int putNumeric(const std::vector<int> &list = {}, const std::vector<int> &exclud
     else if (isList) std::cout << " (in a list of " << joinListToStream(list).str() << ")";
     if (isExcluded) std::cout << " (excluded " << joinListToStream(excludedList).str() << ")";
     std::cout << (msg.length() ? " " + msg + ":" : ":");
+
 
     int userInput;
 
