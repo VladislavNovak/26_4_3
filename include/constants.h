@@ -1,14 +1,22 @@
 #ifndef INC_26_4_3_CONSTANTS_H
 #define INC_26_4_3_CONSTANTS_H
 
-const int DISPLAY_HEIGHT = 30;
-const int DISPLAY_WIDTH = 40;
+#include <vector>
+
+const int MONITOR_MAX_WIDTH = 50;
+const int MONITOR_MAX_HEIGHT = 50;
+const int FIRST_WINDOW = 1;
 
 enum class WindowType {
-    display, simple
+    MONITOR, SIMPLE
 };
+
 enum class SizeType {
-    height, width
+    HEIGHT, WIDTH
+};
+
+enum class Menu {
+    ADD, PRINT, ABOUT, EXIT
 };
 
 #endif //INC_26_4_3_CONSTANTS_H

@@ -23,6 +23,10 @@ void resetBuffer();
 
 int putInput();
 
+int selectMenuItem(const std::vector<std::string> &, const std::string &msg = "Select and");
+
 int putNumeric(const std::vector<int> &list = {}, const std::vector<int> &excludedList = {}, const std::string &msg = "");
+
+void about();
 
 #endif //INC_26_4_3_UTILITIES_H

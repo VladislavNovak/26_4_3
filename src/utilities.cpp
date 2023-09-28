@@ -31,7 +31,25 @@ int putInput() {
         }
         break;
     }
+    resetBuffer();
     return input;
+}
+
+int selectMenuItem(const std::vector<std::string> &list, const std::string &msg) {
+    std::string commands;
+    for (const auto &item : list)
+        commands += (item + (item != list[list.size() - 1] ? "|" : ""));
+
+    printf("%s enter (%s):", msg.c_str(), commands.c_str());
+    while (true) {
+        std::string userInput;
+        std::getline(std::cin, userInput);
+
+        for (int i = 0; i < list.size(); ++i)
+            if (list[i] == userInput) return i;
+
+        std::cout << "Error. Try again:";
+    }
 }
 
 int putNumeric(const std::vector<int> &list, const std::vector<int> &excludedList, const std::string &msg) {
@@ -60,4 +78,10 @@ int putNumeric(const std::vector<int> &list, const std::vector<int> &excludedLis
         std::cout << "Error.Try again:";
     }
     return userInput;
+}
+
+void about() {
+    std::cout << "You can create a buffer of multiple windows." << std::endl;
+    std::cout << "The first is the screen itself, which is a limitation for the rest of the windows." << std::endl;
+    std::cout << "The rest are windows that save data between calls" << std::endl;
 }

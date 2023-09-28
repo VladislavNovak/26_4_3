@@ -10,18 +10,15 @@ void Screen::print(int index) {
     auto widthLeft = windowSize[1][0];
     auto widthRight = widthLeft + windowSize[1][1];
 
-    std::cout << "heightTop:: " << heightTop << std::endl;
-    std::cout << "heightBottom:: " << heightBottom << std::endl;
-    std::cout << "widthLeft:: " << widthLeft << std::endl;
-    std::cout << "widthRight:: " << widthRight << std::endl;
+    std::cout << "display " << displayWidth << "(width) x " << displayHeight << "(height)" << std::endl;
+    std::cout << "window width: " << widthLeft << " x " << widthRight << std::endl;
+    std::cout << "window height: " << heightTop << " x " << heightBottom << std::endl;
 
     std::cout << std::endl;
-    for (int i = 0; i < displayWidth; ++i) {
-        for (int j = 0; j < displayHeight; ++j) {
-            if ((i >= widthLeft) && (i < widthRight) && ((j >= heightTop) && (j < heightBottom))) {
-                std::cout << "* ";
-            }
-            else { std::cout << "- "; }
+    for (int i = 0; i < displayHeight; ++i) {
+        for (int line = 0; line < displayWidth; ++line) {
+            bool isSign = ((line >= widthLeft) && (line < widthRight) && ((i >= heightTop) && (i < heightBottom)));
+            std::cout << (isSign ? "* " : "- ");
         }
         std::cout << std::endl;
     }
@@ -29,16 +26,17 @@ void Screen::print(int index) {
 
 // При инициализации создаёт первый элемент vector<Window*>, который является представлением дисплея
 Screen::Screen() {
-    auto maxHeight = putNumeric({ 20, DISPLAY_HEIGHT }, {}, "max height of display");
-    auto maxWidth = putNumeric({ 20, DISPLAY_WIDTH }, {}, "max width of display");
-    auto* display = new Window{WindowType::display, maxHeight, maxWidth};
+    std::cout << "CREATE MONITOR:" << std::endl;
+    auto maxWidth = putNumeric({20, MONITOR_MAX_WIDTH }, {}, "max WIDTH of MONITOR");
+    auto maxHeight = putNumeric({20, MONITOR_MAX_HEIGHT }, {}, "max HEIGHT of MONITOR");
+    auto* display = new Window{WindowType::MONITOR, maxHeight, maxWidth};
     windows.emplace_back(display);
-    std::cout << std::flush << "Display created" << std::endl;
+    std::cout << "Display created" << std::endl;
 }
 
 // Вызывать при добавлении нового window. Добавляет в vector<Window*> окна начиная с index > 0
 void Screen::addWindow() {
-    auto* simpleWindow = new Window{WindowType::simple, windows[0]->getMaxHeight() , windows[0]->getMaxWidth()};
+    auto* simpleWindow = new Window{WindowType::SIMPLE, windows[0]->getMaxHeight() , windows[0]->getMaxWidth()};
     simpleWindow->setSize();
     windows.emplace_back(simpleWindow);
 }
@@ -55,6 +53,10 @@ void Screen::doPrint(int index) {
         print((int)windows.size() - 1);
     }
     else { print(index); }
+}
+
+int Screen::getCount() {
+    return !windows.empty() ? (int)windows.size() : 0;
 }
 
 // Вызывать при размонтировании

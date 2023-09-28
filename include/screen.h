@@ -19,6 +19,8 @@ public:
 
     void doPrint(int index = 0);
 
+    int getCount();
+
     void doExit();
 };
 
